@@ -15,7 +15,7 @@ def create_business(request):
             
             if form.is_valid():
                 data = form.cleaned_data
-                business = Business(name=data['name'], tin=data['tin'],area=data['area'],email=data['email'])
+                business = Business(business_name=data['business_name'], tin=data['tin'],area=data['area'],email=data['email'])
                 business.save()
                 return render(request, 'index/about.html', {'business': business})
                 
@@ -52,6 +52,50 @@ def create_professional(request):
                 professional.save()
                 return render(request, 'index/about.html', {'professional': professional})
                 
-    form = BusinessForm()
-    return render(request, 'create/create_business.html', {'form': form})
+    form = ProfessionalForm()
+    return render(request, 'create/create_professional.html', {'form': form})
 
+
+
+
+def search(request):
+    return render(request,"search/search.html",{})
+
+
+
+def search_business(request):
+    business = []
+    data = request.GET.get('business_name', None)
+    
+    if data is not None:
+        business = Business.objects.filter(business_name__icontains=data)
+    
+    search = BusinessSearch()
+    return render(request, "search/search_business.html",
+                  {'search': search, 'business': business, 'data':data})
+    
+
+
+def search_professional(request):
+    professional = []
+    data = request.GET.get('name', None)
+    
+    if data is not None:
+        professional = Professional.objects.filter(name__icontains=data)
+    
+    search = ProfessionalSearch()
+    return render(request, "search/search_professional.html",
+                  {'search': search, 'professional': professional, 'data':data})
+
+
+
+def search_user(request):
+    user = []
+    data = request.GET.get('alias', None)
+    
+    if data is not None:
+        user = User.objects.filter(alias__icontains=data)
+    
+    search = UserSearch()
+    return render(request, "search/search_user.html",
+                  {'search': search, 'user': user, 'data':data})

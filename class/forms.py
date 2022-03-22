@@ -5,7 +5,7 @@ class UserForm(forms.Form):
     alias= forms.CharField(max_length=30)
     email= forms.EmailField(max_length=30)
     birthday= forms.CharField(max_length=20)
-    Country= forms.CharField(max_length=30) 
+    country= forms.CharField(max_length=30) 
 
 class UserSearch(forms.Form):
     alias= forms.CharField(max_length=30)

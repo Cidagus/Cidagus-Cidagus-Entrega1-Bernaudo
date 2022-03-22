@@ -1,0 +1,29 @@
+{% extends 'index/index.html' %}
+
+
+
+{% block content %}
+    
+    <form action={% url 'search_user' %} method="get">
+        {% csrf_token %}
+
+        <table>
+            {{search.as_table}}
+        </table>
+
+        <input type="submit" placeholder="Send">
+    </form>
+
+    {% if data %}
+        Searched by data  {{data}}
+    
+            {% for user in search_user %}
+                <li>
+                    {{business}}
+                </li>
+            {% endfor %}
+    {% else %}
+            Nothing searched
+    {% endif %}
+
+{% endblock content %}

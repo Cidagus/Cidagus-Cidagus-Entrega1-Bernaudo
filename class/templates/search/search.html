@@ -1,0 +1,14 @@
+{% extends 'index/index.html' %}
+
+{% block content %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder">Search account</h1>
+
+        <!-- Botones y redireccionamiento-->
+        <a class="btn btn-primary" href={% url 'search_business' %}>Business</a> 
+        <a class="btn btn-primary" href={% url 'search_professional' %}>Professional</a> 
+        <a class="btn btn-primary" href={% url 'search_user' %}>User</a> 
+    </div>
+
+ 
+{% endblock content %}
